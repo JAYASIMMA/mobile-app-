@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'dart:ui';
 import 'prediction_page.dart';
 import 'settings_page.dart';
+import 'healthcare_chat_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -156,7 +157,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   ),
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: const Icon(FontAwesomeIcons.shieldVirus, color: Colors.white, size: 18),
+                child: const Icon(
+                  FontAwesomeIcons.shieldVirus,
+                  color: Colors.white,
+                  size: 18,
+                ),
               ),
               const SizedBox(width: 12),
               const Text(
@@ -186,7 +191,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               );
             },
             child: _buildGlassContainer(
-              child: const Icon(Icons.settings_outlined, color: Colors.white70, size: 20),
+              child: const Icon(
+                Icons.settings_outlined,
+                color: Colors.white70,
+                size: 20,
+              ),
               padding: 10,
             ),
           ),
@@ -264,7 +273,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  child: const Icon(FontAwesomeIcons.wandMagicSparkles, color: Colors.white, size: 20),
+                  child: const Icon(
+                    FontAwesomeIcons.wandMagicSparkles,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
                 const SizedBox(width: 12),
                 const Expanded(
@@ -306,7 +319,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   children: [
                     Icon(FontAwesomeIcons.camera, size: 16),
                     SizedBox(width: 10),
-                    Text('Start Scanning', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                    Text(
+                      'Start Scanning',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -334,26 +353,55 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget _buildActionCards() {
     return FadeInUp(
       duration: const Duration(milliseconds: 800),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            child: _buildGlassActionCard(
-              title: 'Camera',
-              subtitle: 'Live Scan',
-              icon: FontAwesomeIcons.camera,
-              gradientColors: [const Color(0xFF6C63FF), const Color(0xFF9D4EDD)],
-              onTap: () => _pickImage(ImageSource.camera),
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: _buildGlassActionCard(
+                  title: 'Camera',
+                  subtitle: 'Live Scan',
+                  icon: FontAwesomeIcons.camera,
+                  gradientColors: [
+                    const Color(0xFF6C63FF),
+                    const Color(0xFF9D4EDD),
+                  ],
+                  onTap: () => _pickImage(ImageSource.camera),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: _buildGlassActionCard(
+                  title: 'Gallery',
+                  subtitle: 'Upload Photo',
+                  icon: FontAwesomeIcons.images,
+                  gradientColors: [
+                    const Color(0xFF00D2FF),
+                    const Color(0xFF0099CC),
+                  ],
+                  onTap: () => _pickImage(ImageSource.gallery),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: _buildGlassActionCard(
-              title: 'Gallery',
-              subtitle: 'Upload Photo',
-              icon: FontAwesomeIcons.images,
-              gradientColors: [const Color(0xFF00D2FF), const Color(0xFF0099CC)],
-              onTap: () => _pickImage(ImageSource.gallery),
-            ),
+          const SizedBox(height: 16),
+          _buildGlassActionCard(
+            title: 'AI Chat',
+            subtitle: 'Healthcare Assistant',
+            icon: FontAwesomeIcons.commentMedical,
+            gradientColors: [const Color(0xFF00D2FF), const Color(0xFF00E676)],
+            onTap: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => const HealthcareChatPage(),
+                  transitionsBuilder: (_, anim, __, child) {
+                    return FadeTransition(opacity: anim, child: child);
+                  },
+                  transitionDuration: const Duration(milliseconds: 400),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -465,7 +513,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           color: (tip['color'] as Color).withOpacity(0.15),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        child: Icon(tip['icon'] as IconData, color: tip['color'] as Color, size: 18),
+                        child: Icon(
+                          tip['icon'] as IconData,
+                          color: tip['color'] as Color,
+                          size: 18,
+                        ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
@@ -474,17 +526,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           children: [
                             Text(
                               tip['title'] as String,
-                              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 15),
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                              ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               tip['desc'] as String,
-                              style: TextStyle(color: Colors.white.withOpacity(0.5), fontSize: 13),
+                              style: TextStyle(
+                                color: Colors.white.withOpacity(0.5),
+                                fontSize: 13,
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      Icon(Icons.chevron_right, color: Colors.white.withOpacity(0.3)),
+                      Icon(
+                        Icons.chevron_right,
+                        color: Colors.white.withOpacity(0.3),
+                      ),
                     ],
                   ),
                 ),
@@ -508,12 +569,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
         child: Row(
           children: [
-            const Icon(Icons.info_outline_rounded, color: Color(0xFFFFB347), size: 20),
+            const Icon(
+              Icons.info_outline_rounded,
+              color: Color(0xFFFFB347),
+              size: 20,
+            ),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
                 'AI analysis is for informational purposes only. Always consult a dermatologist.',
-                style: TextStyle(fontSize: 12, color: Colors.white.withOpacity(0.6)),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.white.withOpacity(0.6),
+                ),
               ),
             ),
           ],

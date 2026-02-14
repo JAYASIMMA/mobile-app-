@@ -5,7 +5,7 @@ import 'api_config.dart';
 
 class OllamaService {
   /// Sends an image to the Ollama API and returns the prediction result.
-  /// The image is encoded as base64 and sent to the jayasimma/healthcare model.
+  /// The image is encoded as base64 and sent to the jayasimma/gennai model.
   static Future<Map<String, dynamic>> analyzeImage(File imageFile) async {
     try {
       final bytes = await imageFile.readAsBytes();
@@ -14,7 +14,8 @@ class OllamaService {
       final url = await ApiConfig.getGenerateUrl();
       final model = await ApiConfig.getModel();
 
-      final prompt = '''You are a dermatology AI assistant. Analyze this skin image carefully.
+      final prompt =
+          '''You are a dermatology AI assistant. Analyze this skin image carefully.
 Provide your analysis in the following JSON format ONLY, with no extra text:
 {
   "disease_name": "Name of the detected skin condition",
@@ -35,10 +36,7 @@ Provide your analysis in the following JSON format ONLY, with no extra text:
               'prompt': prompt,
               'images': [base64Image],
               'stream': false,
-              'options': {
-                'temperature': 0.3,
-                'num_predict': 1024,
-              },
+              'options': {'temperature': 0.3, 'num_predict': 1024},
             }),
           )
           .timeout(const Duration(seconds: 120));
@@ -58,7 +56,10 @@ Provide your analysis in the following JSON format ONLY, with no extra text:
           'confidence': 'N/A',
           'severity': 'N/A',
           'symptoms': <String>[],
-          'recommendations': ['Check if Ollama server is running', 'Verify the model is installed'],
+          'recommendations': [
+            'Check if Ollama server is running',
+            'Verify the model is installed',
+          ],
           'seek_medical_attention': false,
         };
       }
@@ -73,8 +74,8 @@ Provide your analysis in the following JSON format ONLY, with no extra text:
         'symptoms': <String>[],
         'recommendations': [
           'Start Ollama server: ollama serve',
-          'Pull the model: ollama pull jayasimma/healthcare',
-          'Check server URL in Settings'
+          'Pull the model: ollama pull jayasimma/gennai',
+          'Check server URL in Settings',
         ],
         'seek_medical_attention': false,
       };
@@ -128,7 +129,7 @@ Provide your analysis in the following JSON format ONLY, with no extra text:
   /// Test connectivity to the Ollama server.
   static Future<bool> testConnection() async {
     try {
-      final host = await ApiConfig.getHost();
+      final host = await ApiConfig.getEffectiveHost();
       final response = await http
           .get(Uri.parse(host))
           .timeout(const Duration(seconds: 5));

@@ -48,7 +48,9 @@ class _SettingsPageState extends State<SettingsPage> {
           content: const Text('Settings saved!'),
           backgroundColor: const Color(0xFF00E676),
           behavior: SnackBarBehavior.floating,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
       );
     }
@@ -92,7 +94,10 @@ class _SettingsPageState extends State<SettingsPage> {
             child: const Icon(Icons.arrow_back, color: Colors.white),
           ),
         ),
-        title: const Text('Settings', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text(
+          'Settings',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -134,7 +139,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           color: const Color(0xFF6C63FF),
                           isSelected: _inferenceMode == InferenceMode.ollama,
                           onTap: () {
-                            setState(() => _inferenceMode = InferenceMode.ollama);
+                            setState(
+                              () => _inferenceMode = InferenceMode.ollama,
+                            );
                           },
                         ),
                         const SizedBox(height: 12),
@@ -149,7 +156,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           isEnabled: _tfliteModelLoaded,
                           onTap: () {
                             if (_tfliteModelLoaded) {
-                              setState(() => _inferenceMode = InferenceMode.tflite);
+                              setState(
+                                () => _inferenceMode = InferenceMode.tflite,
+                              );
                             }
                           },
                         ),
@@ -186,7 +195,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         _buildInputField(
                           label: 'Model Name',
                           controller: _modelController,
-                          hint: 'jayasimma/healthcare',
+                          hint: 'jayasimma/gennai',
                           icon: FontAwesomeIcons.brain,
                         ),
                       ],
@@ -207,20 +216,33 @@ class _SettingsPageState extends State<SettingsPage> {
                           children: [
                             const Row(
                               children: [
-                                Icon(FontAwesomeIcons.wifi, color: Color(0xFF00D2FF), size: 16),
+                                Icon(
+                                  FontAwesomeIcons.wifi,
+                                  color: Color(0xFF00D2FF),
+                                  size: 16,
+                                ),
                                 SizedBox(width: 10),
-                                Text('Connection Status',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                                Text(
+                                  'Connection Status',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
                               ],
                             ),
                             if (_isConnected != null)
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 12,
+                                  vertical: 6,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: (_isConnected!
-                                          ? const Color(0xFF00E676)
-                                          : const Color(0xFFFF6B6B))
-                                      .withOpacity(0.12),
+                                  color:
+                                      (_isConnected!
+                                              ? const Color(0xFF00E676)
+                                              : const Color(0xFFFF6B6B))
+                                          .withOpacity(0.12),
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Text(
@@ -246,13 +268,20 @@ class _SettingsPageState extends State<SettingsPage> {
                                     width: 16,
                                     height: 16,
                                     child: CircularProgressIndicator(
-                                        strokeWidth: 2, color: Color(0xFF00D2FF)),
+                                      strokeWidth: 2,
+                                      color: Color(0xFF00D2FF),
+                                    ),
                                   )
                                 : const Icon(FontAwesomeIcons.bolt, size: 14),
-                            label: Text(_isTesting ? 'Testing...' : 'Test Connection'),
+                            label: Text(
+                              _isTesting ? 'Testing...' : 'Test Connection',
+                            ),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: const Color(0xFF00D2FF),
-                              side: const BorderSide(color: Color(0xFF00D2FF), width: 1.5),
+                              side: const BorderSide(
+                                color: Color(0xFF00D2FF),
+                                width: 1.5,
+                              ),
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(14),
@@ -274,11 +303,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: ElevatedButton.icon(
                       onPressed: _saveSettings,
                       icon: const Icon(Icons.save_rounded),
-                      label: const Text('Save Settings',
-                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                      label: const Text(
+                        'Save Settings',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(vertical: 18),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
                       ),
                     ),
                   ),
@@ -303,9 +339,18 @@ class _SettingsPageState extends State<SettingsPage> {
                       children: [
                         _buildStep(1, 'Install Ollama from ollama.com'),
                         _buildStep(2, 'Run: ollama serve'),
-                        _buildStep(3, 'Pull the model: ollama pull jayasimma/healthcare'),
-                        _buildStep(4, 'Set the server URL above and test the connection'),
-                        _buildStep(5, 'Or switch to On-Device mode for offline use'),
+                        _buildStep(
+                          3,
+                          'Pull the model: ollama pull jayasimma/gennai',
+                        ),
+                        _buildStep(
+                          4,
+                          'Set the server URL above and test the connection',
+                        ),
+                        _buildStep(
+                          5,
+                          'Or switch to On-Device mode for offline use',
+                        ),
                       ],
                     ),
                   ),
@@ -334,10 +379,14 @@ class _SettingsPageState extends State<SettingsPage> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.1) : Colors.white.withOpacity(0.02),
+          color: isSelected
+              ? color.withOpacity(0.1)
+              : Colors.white.withOpacity(0.02),
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isSelected ? color.withOpacity(0.4) : Colors.white.withOpacity(0.06),
+            color: isSelected
+                ? color.withOpacity(0.4)
+                : Colors.white.withOpacity(0.06),
             width: isSelected ? 1.5 : 1,
           ),
         ),
@@ -349,7 +398,11 @@ class _SettingsPageState extends State<SettingsPage> {
                 color: color.withOpacity(isEnabled ? 0.15 : 0.05),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: isEnabled ? color : Colors.grey, size: 18),
+              child: Icon(
+                icon,
+                color: isEnabled ? color : Colors.grey,
+                size: 18,
+              ),
             ),
             const SizedBox(width: 14),
             Expanded(
@@ -378,10 +431,7 @@ class _SettingsPageState extends State<SettingsPage> {
             if (isSelected)
               Container(
                 padding: const EdgeInsets.all(4),
-                decoration: BoxDecoration(
-                  color: color,
-                  shape: BoxShape.circle,
-                ),
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
                 child: const Icon(Icons.check, color: Colors.white, size: 14),
               )
             else
@@ -418,7 +468,10 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Icon(icon, color: color, size: 14),
         ),
         const SizedBox(width: 12),
-        Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        Text(
+          title,
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }
@@ -432,7 +485,10 @@ class _SettingsPageState extends State<SettingsPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.5))),
+        Text(
+          label,
+          style: TextStyle(fontSize: 13, color: Colors.white.withOpacity(0.5)),
+        ),
         const SizedBox(height: 8),
         TextField(
           controller: controller,
@@ -440,7 +496,11 @@ class _SettingsPageState extends State<SettingsPage> {
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: TextStyle(color: Colors.white.withOpacity(0.2)),
-            prefixIcon: Icon(icon, color: Colors.white.withOpacity(0.3), size: 16),
+            prefixIcon: Icon(
+              icon,
+              color: Colors.white.withOpacity(0.3),
+              size: 16,
+            ),
             filled: true,
             fillColor: Colors.white.withOpacity(0.05),
             border: OutlineInputBorder(
@@ -453,9 +513,15 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(14),
-              borderSide: const BorderSide(color: Color(0xFF6C63FF), width: 1.5),
+              borderSide: const BorderSide(
+                color: Color(0xFF6C63FF),
+                width: 1.5,
+              ),
             ),
-            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 14,
+            ),
           ),
         ),
       ],
@@ -472,13 +538,19 @@ class _SettingsPageState extends State<SettingsPage> {
             width: 24,
             height: 24,
             decoration: BoxDecoration(
-              gradient: const LinearGradient(colors: [Color(0xFF6C63FF), Color(0xFF00D2FF)]),
+              gradient: const LinearGradient(
+                colors: [Color(0xFF6C63FF), Color(0xFF00D2FF)],
+              ),
               borderRadius: BorderRadius.circular(7),
             ),
             child: Center(
               child: Text(
                 '$number',
-                style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white),
+                style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -486,7 +558,10 @@ class _SettingsPageState extends State<SettingsPage> {
           Expanded(
             child: Text(
               text,
-              style: TextStyle(color: Colors.white.withOpacity(0.7), height: 1.4),
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                height: 1.4,
+              ),
             ),
           ),
         ],
